@@ -1,0 +1,22 @@
+{
+  "name": "signpdf",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "bereich": "^1.0.0",
+    "canvas": "^2.8.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jsdom": "^16.6.0",
+    "mongoose": "^5.12.14",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.2",
+    "pdfjs-dist": "^2.8.335"
+  }
+}
