@@ -17,8 +17,8 @@ a {
 body {
   background: #eff;
 }
-canvas {
-	box-shadow: 10px 10px 15px 2px rgba(0, 0, 0, 0.3);
+canvas[id*="page-"] {
+	box-shadow: 1px 2px 8px -1px rgba(0, 0, 0, 0.23);
 	padding: 10px;
 	margin: 5px;
 }

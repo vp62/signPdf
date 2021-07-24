@@ -12,7 +12,6 @@ const ejs=require('ejs');
 const s=require('./public/javascripts/Show');
 const renderPdf=require('./pdf');
 const { createCanvas } = require('canvas');
-const jsdom=require('./Dom');
 const { JSDOM } = require('jsdom');
 const { Document } = require('mongoose');
 
@@ -34,7 +33,7 @@ const multerStorage=multer.diskStorage({
   //create multer storage configuration
   //create multerFilter for filter a file
   destination:(req,file,cb)=>{
-    cb(null,'/home/vp/Project/SignPdf/Files');
+    cb(null,path.join(__dirname,'/Files'));
   },  
   filename:(req,file,cb)=>{
     let ext=file.mimetype.split('/')[1];

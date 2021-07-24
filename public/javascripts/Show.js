@@ -11,15 +11,26 @@ function renderPDF(data, canvasContainer){
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
+
+    // console.log(pageIndex)
+    // console.log(numPages)
+    console.log(page);
+    canvas.setAttribute('id',"page-"+(page._pageIndex+1));
     canvasContainer.appendChild(canvas);
     
-    page.render(renderContext);
+    page.render(renderContext)
+    // .then(function(){
+    //     return page.getTextContent();
+    // }
+    // )
 }
 
 function renderPages(pdfDoc) {
     for(var num = 1; num <= pdfDoc.numPages; num++)
         pdfDoc.getPage(num).then(renderPage);
 }
+
+
 
 pdfjsLib.disableWorker = true;
 pdfjsLib.getDocument(data).promise.then(renderPages);
