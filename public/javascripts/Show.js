@@ -16,7 +16,11 @@ function renderPDF(data, canvasContainer){
     // console.log(numPages)
     console.log(page);
     canvas.setAttribute('id',"page-"+(page._pageIndex+1));
-    canvasContainer.appendChild(canvas);
+    var pageHolder=document.createElement('div');
+    pageHolder.setAttribute('id','holder-page-'+(page._pageIndex+1));
+    pageHolder.appendChild(canvas);
+
+    canvasContainer.appendChild(pageHolder);
     
     page.render(renderContext)
     // .then(function(){

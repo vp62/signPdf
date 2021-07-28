@@ -7,12 +7,18 @@ body {
 a {
   color: #00B7FF;
 }
+.modalC{
+  display: flex;
+  justify-content: center;
+  position: sticky;
+}
 .container{
   
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: sticky;
 }
 body {
   background: #eff;
