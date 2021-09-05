@@ -23,10 +23,7 @@ function renderPDF(data, canvasContainer){
     canvasContainer.appendChild(pageHolder);
     
     page.render(renderContext)
-    // .then(function(){
-    //     return page.getTextContent();
-    // }
-    // )
+   
 }
 
 function renderPages(pdfDoc) {

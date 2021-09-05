@@ -1,5 +1,5 @@
 
-var Canvas = require('canvas');
+// var Canvas = require('canvas');
 let pdfjs=require('./node_modules/pdfjs-dist/legacy/build/pdf')
 let fs = require('fs');
 

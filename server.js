@@ -13,4 +13,4 @@ mongoose.connect(URI,{
 
 
 
-app.listen(3000,()=>console.log("running on 3000"));
+app.listen(3000,()=>console.log("http://localhost:3000/"));

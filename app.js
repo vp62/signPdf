@@ -7,15 +7,13 @@ var path = require('path');
 const fileModel=require('./model/FileShema');
 const multer=require('multer');
 const fs=require('fs')
-const Canvas=require('canvas');
+
 const ejs=require('ejs');
 const s=require('./public/javascripts/Show');
-const renderPdf=require('./pdf');
-const { createCanvas } = require('canvas');
-const { JSDOM } = require('jsdom');
+
 const { Document } = require('mongoose');
 
-// const bg=require('./public/javascripts/Show');
+const bg=require('./public/javascripts/Show');
 var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

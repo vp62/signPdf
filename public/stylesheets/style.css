@@ -38,7 +38,7 @@ canvas[id*="page-"] {
 }
 .image-upload {
  
-  width: 500px;
+  width: 600px;
   height: 300px;
   border: 1px dashed #ddd;
   border-radius: 5px;
@@ -47,7 +47,7 @@ canvas[id*="page-"] {
   text-align: center;
   background: #aee;
   color: rgb(53, 51, 51);
-  overflow: hidden
+  overflow: hidden;
 }
 
 .item-wrapper form img {
@@ -57,7 +57,7 @@ canvas[id*="page-"] {
   max-height: 400px;
   width: auto;
   border-radius: 5px;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .image-upload img {
