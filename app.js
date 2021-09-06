@@ -61,13 +61,13 @@ app.get('/', function(req, res, next) {
   res.render('index', { title: 'SignPdf' });
 });  
 
-let file,pdf;
+let file,pdf,file_name;
 //upload
 app.post('/api/upload',upload.single('uploadFile'),async(req,res)=>{
   console.log("Inpost");
   try {
-    
-    console.log(":"+req.file);
+    file_name=req.file.originalname;
+    console.log(":"+req.file.originalname);
           fs.readFile(req.file.path,(err,data)=>{
             console.log(data);
             file=data.toString();
@@ -89,24 +89,22 @@ app.get('/show',(req,res)=>{
 //  console.log(pdf);
  res.render('shows',{url:pdf,pdf:file});
 });
-app.post('/download',async (req,res)=>{
-  console.log(req.body)
-  console.log(req.body.x)
-  await download({imgdet:req.body});
-  // res.send('asd');
-  // res.redirect('/')
-//   var file = fs.createReadStream(path.join(__dirname,'test.pdf'));
-// var stat = fs.statSync();
-// res.setHeader('Content-Length', stat.size);
-// res.setHeader('Content-Type', 'application/pdf');
-// res.setHeader('Content-Disposition', 'attachment; filename=test.pdf');
-res.download(path.join(__dirname,'test.pdf'))
-  
+app.post('/download',async (req,res,next)=>{
+ try{
+    console.log(req.body)
+    console.log(req.body.x)
+    await download({imgdet:req.body,pdfUrl:path.join(__dirname,`Files/admin-${file_name}`)},);
+    res.redirect('/down')}
+  catch(err){
+  next(err)
+  }
+})
+app.get('/down',(req,res)=>{
+  res.download(path.join(__dirname,`Files/admin-${file_name}`)
+    )
+  })
 
-})
-app.get('/go',(req,res)=>{
-  res.download('/test.pdf')
-})
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
