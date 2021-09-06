@@ -25,8 +25,8 @@ body {
 }
 canvas[id*="page-"] {
 	box-shadow: 1px 2px 8px -1px rgba(0, 0, 0, 0.23);
-	padding: 10px;
-	margin: 5px;
+	/* padding: 10px;
+	margin: 5px; */
 }
 
 .item .item-content {
@@ -90,6 +90,7 @@ canvas[id*="page-"] {
   border-radius: 4px;
   margin-bottom: 20px
 }
+
 .admin_submit{
 position: relative;
 }

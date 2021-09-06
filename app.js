@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var {download}=require('./download')
 
 var express = require('express');
 var path = require('path');
@@ -69,6 +70,7 @@ app.post('/api/upload',upload.single('uploadFile'),async(req,res)=>{
     console.log(":"+req.file);
           fs.readFile(req.file.path,(err,data)=>{
             console.log(data);
+            file=data.toString();
             pdf=data.toString('base64');
             res.redirect('/show');
           });
@@ -85,9 +87,26 @@ app.post('/api/upload',upload.single('uploadFile'),async(req,res)=>{
 // get show
 app.get('/show',(req,res)=>{
 //  console.log(pdf);
- res.render('shows',{url:pdf});
+ res.render('shows',{url:pdf,pdf:file});
 });
+app.post('/download',async (req,res)=>{
+  console.log(req.body)
+  console.log(req.body.x)
+  await download({imgdet:req.body});
+  // res.send('asd');
+  // res.redirect('/')
+//   var file = fs.createReadStream(path.join(__dirname,'test.pdf'));
+// var stat = fs.statSync();
+// res.setHeader('Content-Length', stat.size);
+// res.setHeader('Content-Type', 'application/pdf');
+// res.setHeader('Content-Disposition', 'attachment; filename=test.pdf');
+res.download(path.join(__dirname,'test.pdf'))
+  
 
+})
+app.get('/go',(req,res)=>{
+  res.download('/test.pdf')
+})
 app.use(function(req, res, next) {
   next(createError(404));
 });
