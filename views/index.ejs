@@ -23,7 +23,7 @@
 <body>
   <div class="item-wrapper one">
     <div class="item">
-      <form data-validation="true" action="/api/upload" method="post" enctype="multipart/form-data">
+      <form id="form"data-validation="true" action="/api/upload" method="post" enctype="multipart/form-data">
         <div class="item-inner">
           <div class="item-content">
             <div class="image-upload">
@@ -33,16 +33,16 @@
                   <div class="dplay-tbl">
                     <div class="dplay-tbl-cell">
                       <i class="fa fa-cloud-upload"></i>
-                      <h5><b>Choose Your Image to Upload</b></h5>
-                      <h6 class="mt-10 mb-70">Or Drop Your Image Here</h6>
+                      <h5><b>Choose Your PDF to Upload</b></h5>
+                      <h6 class="mt-10 mb-70">Or Drop Your PDF Here</h6>
                     </div>
                   </div>
                 </div>
                 <!--upload-content-->
-                <input type="file" name="uploadFile" id="uploadFile" accept=".pdf" class="image-input" />
+                <input type="file" name="uploadFile" id="uploadFile" accept=".pdf" class="image-input" size=""/>
               </label>
             </div>
-            <input class="btn btn-primary" type="submit" />
+            <!-- <input class="btn btn-primary" type="submit" /> -->
           </div>
           <!--item-content-->
         </div>
@@ -52,5 +52,18 @@
     <!--item-->
   </div>
 </body>
+<script>
+var uploadField = document.getElementById("uploadFile");
 
+uploadField.onchange = function() {
+  console.log(this.files[0].size )
+    if(this.files[0].size < 12582912){
+      document.getElementById("form").submit();
+    }
+    else{
+      alert("File is too big!");
+       this.value = "";
+    }
+};
+</script>
 </html>

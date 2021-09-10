@@ -12,14 +12,18 @@ a {
   justify-content: center;
   position: sticky;
 }
-.container{
-  
+.container {
+  overflow: scroll;
   display: flex;
+  height: 90vh;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   position: sticky;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
 }
+
+
 body {
   background: #eff;
 }
@@ -29,24 +33,31 @@ canvas[id*="page-"] {
 	margin: 5px; */
 }
 
-.item .item-content {
+/* .item .item-content {
   padding: 30px 35px
+} */
+.item .item-content {
+  padding: 30px 35px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 .item-wrapper{
    display: flex;
   justify-content: center;
 }
 .image-upload {
- 
-  width: 600px;
+  width: 468px;
   height: 300px;
-  border: 1px dashed #ddd;
+  border: 2px dashed #000;
   border-radius: 5px;
   margin-bottom: 20px;
   position: relative;
   text-align: center;
-  background: #aee;
-  color: rgb(53, 51, 51);
+  background: #ffffff80;
+  color: rgb(0 0 0);
   overflow: hidden;
 }
 
@@ -174,6 +185,7 @@ height: 100%;
    background-color: rgb(238, 230, 230);
 }
 
+
 .draggable:hover .tleft{
   display: block;
   top:-2px;
@@ -186,8 +198,10 @@ height: 100%;
 }
 .draggable:hover .tright{
   display: block;
+  position: inherit;
   top:-2px;
   right:-2px;
+  
 
 }
 .draggable:hover .bright{
@@ -196,9 +210,63 @@ height: 100%;
   right:-2px;
 
 }
-.tleft{
+ 
+ .active .tright,.tleft,.bright,.bleft {
+   display: none;
+   position: absolute;
+   width: 8px; 
+   border:1.2px groove rgb(64, 171, 185);
+   height: 8px;
+   border-radius: 50%;
+   background-color: rgb(238, 230, 230);
+}
+
+.active{
+  display: block;
+}
+.active .tleft{
+  display: block;
   top:-2px;
   left:-2px;
+}
+.active .bleft{
+  display: block;
+  bottom:-2px;
+  left:-2px;
+}
+.active .tright{
+  display: block;
+  position: inherit;
+  top:-2px;
+  right:-2px;
+  
+
+}
+.active .bright{
+  display: block;
+  bottom:-2px;
+  right:-2px;
+
+}
+/* .draggable:hover .fa-trash{
+  display: block;
+  top:-3px;
+  position: absolute;
+  right: -22px;
+font-size: 18pt;
+cursor: pointer;
+} */
+.active .fa-trash{
+  display: block;
+  top:-3px;
+  position: absolute;
+  right: -22px;
+font-size: 18pt;
+cursor: pointer;
+}
+.tleft{
+  top:0px;
+  left:0px;
 
 }
  .bleft{
@@ -214,6 +282,12 @@ height: 100%;
   bottom:-2px;
   right:-2px;
 
+}
+.tright .by-trash{
+  display: none;
+  top:-2px;
+  right: -12px;
+  margin-left: 2px;
 }
 
 #downloadbtn,#savebtn{
