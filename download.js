@@ -26,7 +26,7 @@ async function embedImages(pdfData) {
         writePage.drawImage(pngImage, {
             x: img_data.x,
 
-            y: writePage.getHeight() -img_data.y-img_data.height/2-126.434,
+            y: writePage.getHeight() -(img_data.y+img_data.height/2+127.534),
             width: img_data.width,
             height: img_data.height,
         })

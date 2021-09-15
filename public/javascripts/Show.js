@@ -1,5 +1,5 @@
 function renderPDF(data, canvasContainer){
-    function renderPage(page) {
+     async function  renderPage(page) {
     var viewport = page.getViewport({scale:1});
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
@@ -10,6 +10,9 @@ function renderPDF(data, canvasContainer){
     
     canvas.height = viewport.height;
     canvas.width = viewport.width;
+    console.log("from show js")
+    console.log(canvas.height)
+    console.log(canvas.width)
 
 
     // console.log(pageIndex)
@@ -19,16 +22,12 @@ function renderPDF(data, canvasContainer){
     var pageHolder=document.createElement('div');
     pageHolder.setAttribute('id','holder-page-'+(page._pageIndex+1));
     pageHolder.appendChild(canvas);
-
-    canvasContainer.appendChild(pageHolder);
-    
-    page.render(renderContext)
-   
+    canvasContainer.appendChild(pageHolder);    
+  await page.render(renderContext);
 }
-
-function renderPages(pdfDoc) {
-    for(var num = 1; num <= pdfDoc.numPages; num++)
-        pdfDoc.getPage(num).then(renderPage);
+async function renderPages(pdfDoc) {
+    for(var num = 1; num <= await pdfDoc.numPages; num++)
+        pdfDoc.getPage(num).then(renderPage).then(data=>{console.log("data");console.log(data)});
 }
 
 

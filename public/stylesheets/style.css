@@ -13,9 +13,11 @@ a {
   position: sticky;
 }
 .container {
-  overflow: scroll;
+  overflow-y: scroll;
   display: flex;
   height: 90vh;
+  width:595px;
+  min-width: 45%;
   flex-direction: column;
   position: sticky;
   flex-wrap: nowrap;
@@ -175,7 +177,7 @@ height: 100%;
 }
 
  
- .draggable .tright,.tleft,.bright,.bleft {
+ /* .draggable .tright,.tleft,.bright,.bleft,.tmiddle,.bmiddle {
    display: none;
    position: absolute;
    width: 8px; 
@@ -184,8 +186,7 @@ height: 100%;
    border-radius: 50%;
    background-color: rgb(238, 230, 230);
 }
-
-
+.draggable:hover{ border:2px solid teal;}
 .draggable:hover .tleft{
   display: block;
   top:-2px;
@@ -196,6 +197,11 @@ height: 100%;
   bottom:-2px;
   left:-2px;
 }
+.draggable:hover .bmiddle{
+  display: block;
+  bottom:-2px;
+  left:12px;
+}
 .draggable:hover .tright{
   display: block;
   position: inherit;
@@ -204,14 +210,21 @@ height: 100%;
   
 
 }
-.draggable:hover .bright{
+.draggable:hover .tmiddle{
+  display: block;
+  position: inherit;
+  top:-2px;
+  right:15px;
+
+}
+.draggable:hover .bright:not(first_child){
   display: block;
   bottom:-2px;
   right:-2px;
 
 }
  
- .active .tright,.tleft,.bright,.bleft {
+ .active .tright,.tleft,.bright,.bleft,.tmiddle,.bmiddle {
    display: none;
    position: absolute;
    width: 8px; 
@@ -221,9 +234,7 @@ height: 100%;
    background-color: rgb(238, 230, 230);
 }
 
-.active{
-  display: block;
-}
+
 .active .tleft{
   display: block;
   top:-2px;
@@ -248,14 +259,7 @@ height: 100%;
   right:-2px;
 
 }
-/* .draggable:hover .fa-trash{
-  display: block;
-  top:-3px;
-  position: absolute;
-  right: -22px;
-font-size: 18pt;
-cursor: pointer;
-} */
+
 .active .fa-trash{
   display: block;
   top:-3px;
@@ -283,12 +287,12 @@ cursor: pointer;
   right:-2px;
 
 }
-.tright .by-trash{
+.by-trash{
   display: none;
   top:-2px;
   right: -12px;
   margin-left: 2px;
-}
+} */
 
 #downloadbtn,#savebtn{
   display: none;
@@ -300,4 +304,115 @@ cursor: pointer;
 }
 .btn{
   margin: 3px;
+}
+/* for sign border */
+.signdoc{position: relative;}
+.tright,.tleft,.tmiddle,.bright,.bleft,.bmidlle,.ylm,.yrm{
+  border:2px solid #101a2c;
+  width:3%;height:6%;
+  position:absolute;
+  background:#0a8cc0;
+  border-radius:50%;
+  display:none;
+}
+.signdoc:hover{ border:2px solid teal;}
+.signdoc:hover .tright{
+  display:block;
+ 
+}
+.signdoc:hover .yrm{
+  display:block;
+}
+.signdoc:hover .ylm{
+  display:block;
+}
+.signdoc:hover .tmiddle{
+  display:block;
+}
+.signdoc:hover .bright{
+  display:block;
+}
+.signdoc:hover .bmidlle{
+  display:block;
+}
+.signdoc:hover .bleft
+{
+  display:block;
+}
+.signdoc:hover .tleft
+{
+  display:block;
+}
+
+
+.tright{
+  top:-5%;
+  right:-2%;
+}.tmiddle{
+  top:-5%;
+  right:50%;
+}.tleft{
+  top:-5%;
+  left:-2%;
+}.ylm{
+  top:50%;
+  left:-2%;
+}
+.yrm{
+  top:50%;
+  right:-2%;
+}
+.bright{
+  bottom:-5%;
+  right:-2%;
+}
+.bmidlle{
+  bottom:-5%;
+  right:50%;
+}
+.bleft{
+  bottom:-5%;
+  left:-2%;
+}
+
+.active-sign{
+
+  border: 2px solid rgb(110, 152, 241);
+}
+.active-sign .tright{
+  display:block;
+ 
+}
+.active-sign .yrm{
+  display:block;
+}
+.active-sign .ylm{
+  display:block;
+}
+.active-sign .tmiddle{
+  display:block;
+}
+.active-sign .bright{
+  display:block;
+}
+.active-sign .bmidlle{
+  display:block;
+}
+.active-sign .bleft
+{
+  display:block;
+}
+.active-sign .tleft
+{
+  display:block;
+}
+.fa-trash{
+  display:none;
+}
+.active-sign i.fa.fa-trash {
+  display: block;
+  position: absolute;
+  right: -230%;
+  font-size: 18pt;
+  cursor: pointer;
 }

@@ -46,10 +46,14 @@ var translatePos = {
   y: 0
 };
 
-let which_page=1;
-document.querySelector('.container').addEventListener('scroll',()=>{
-  // console.log(document.querySelector('.container').scrollTop)
-  which_page=Math.ceil((document.querySelector('.container').scrollTop/641))
+let which_page = 1;
+document.querySelector('.container').addEventListener('scroll', () => {
+  var top = document.querySelector('.container').scrollTop;
+  // if(top/744<)
+  console.log(document.querySelector('.container').scrollTop / 744.32)
+  console.log(document.querySelector('.container').offsetTop)
+
+  which_page = Math.ceil((top / 844.32))
   console.log(which_page)
 
 })
@@ -57,6 +61,9 @@ let sign, signHolder
 document.getElementById('apply').addEventListener('click', (event) => {
   sign = document.createElement('img');
   signHolder = document.createElement('div');
+  insideHolder = document.createElement('div');
+
+  // signHolder.setAttribute('class',"signHolder")
   data = signaturePad.toDataURL('image/png');
   sign.src = data;
   sign.setAttribute('class', 'sign');
@@ -64,31 +71,44 @@ document.getElementById('apply').addEventListener('click', (event) => {
   var tleft = document.createElement('div')
   var bleft = document.createElement('div')
   var bright = document.createElement('div')
+  var tmiddle = document.createElement('div')
+  var ylm = document.createElement('div')
+  var yrm = document.createElement('div')
+  var bmiddle = document.createElement('div')
   var dicon = document.createElement('i')
-  dicon.setAttribute('class',"fa fa-trash");
+  dicon.setAttribute('class', "fa fa-trash");
   tright.setAttribute('class', 'tright');
   tleft.setAttribute('class', 'tleft');
+  tmiddle.setAttribute('class', 'tmiddle');
+  ylm.setAttribute('class', 'ylm');
+  yrm.setAttribute('class', 'yrm');
   bright.setAttribute('class', 'bright');
+  bmiddle.setAttribute('class', 'bmidlle');
   bleft.setAttribute('class', 'bleft');
-  signHolder.appendChild(tright)
+  insideHolder.appendChild(tright)
   tright.appendChild(dicon)
-  signHolder.appendChild(tleft)
-  signHolder.appendChild(bleft)
-  signHolder.appendChild(bright)
-  console.log(`page is${which_page}`+"page is")
+  insideHolder.appendChild(tleft)
+  insideHolder.appendChild(tmiddle)
+  insideHolder.appendChild(bmiddle)
+  insideHolder.appendChild(bleft)
+  insideHolder.appendChild(ylm)
+  insideHolder.appendChild(yrm)
+  insideHolder.appendChild(bright)
+  console.log(`page is${which_page}` + "page is")
 
-  let page = document.getElementById(`holder-page-${which_page||1}`);
+  let page = document.getElementById(`holder-page-${which_page || 1}`);
   page.classList.add('dragarea');
+  insideHolder.setAttribute('class', "signdoc")
   signHolder.classList.add('draggable');
- 
+
   sign.onload = () => {
     console.log('image ready')
-    signHolder.appendChild(sign)
-   
+    insideHolder.appendChild(sign)
+    signHolder.appendChild(insideHolder)
+
   }
-    
+
   page.append(signHolder)
-deletebtn()
   download_btn.style.display = "none";
   save_btn.style.display = "block";
   const position = { x: 0, y: 0 }
@@ -138,26 +158,27 @@ interact('.draggable')
 
         event.target.style.transform =
           `translate(${position.x}px, ${position.y}px)`
-          // saveit()''
-          console.log(event.target.style.transform)
+        // saveit()''
+        console.log(event.target.style.transform)
       },
     }
   })
 
 var imgdet = [];
 function saveit() {
- var is_there= imgdet.findIndex((img_data,index)=>{
-  console.log(typeof(img_data.img)) 
-  console.log(typeof(data.toString())) 
-  if(img_data.img.toString() == data.toString()){
-    return index;
-  }})
- console.log(is_there)
- if(is_there==-1){
+  var is_there = imgdet.findIndex((img_data, index) => {
+    console.log(typeof (img_data.img))
+    console.log(typeof (data.toString()))
+    if (img_data.img.toString() == data.toString()) {
+      return index;
+    }
+  })
+  console.log(is_there)
+  if (is_there == -1) {
 
-   imgdet.push({ img: data.toString(), x: position.x || 306, y: position.y || 396, width: width, height: height ,page:which_page-1})
-   console.log('saved')
-   console.log(JSON.stringify(imgdet))
+    imgdet.push({ img: data.toString(), x: position.x || 306, y: position.y || 396, width: width, height: height, page: which_page - 1 })
+    console.log('saved')
+    console.log(JSON.stringify(imgdet))
   }
 }
 function downloadit() {
@@ -176,39 +197,38 @@ function downloadit() {
     .then(function (res) { console.log(res) })
     .catch(function (res) { console.log(res) })
 }
-function deletebtn(){
-  console.log('loaded');
-  var icon=document.querySelectorAll('.fa-trash');
-  icon.forEach(item=>item.addEventListener('click',(e)=>{
-   
-    var is_there= imgdet.findIndex((img_data)=>{
-     return img_data.img == item.parentNode.parentNode.querySelector('.sign').getAttribute('src')});
-    //  {
-    //     return index;
-    //   }})
-     console.log(is_there)
-     if(is_there!=-1){
-     
-       imgdet.splice(is_there,1)
-       item.parentNode.parentNode.remove()
-       console.log('deleted')
-       console.log(JSON.stringify(imgdet))
-      }
-      else{
-       item.parentNode.parentNode.remove()
 
-      }
-  }));
+document.querySelector('.container').addEventListener('click', (e) => {
+  console.log(e.target.className)
+  e.stopPropagation()
+  e.preventDefault()
 
-}
-setInterval(()=>{
-  console.log(document.querySelectorAll('.draggable')[0]+" check")
-  let sign_Exists=document.querySelectorAll('.draggable');
-  if(sign_Exists!=undefined){
-     sign_Exists.forEach(sign_Wrapper=>sign_Wrapper.addEventListener('click',()=>{
-      sign_Wrapper.classList.toggle('active');
-      console.log(sign_Wrapper.querySelector('.sign').getAttribute('src'))
-      console.log('clicked')
-    }))//EOF sign container check
+  e.bubbles = false;
+  console.log(e.target.classList)
+  if (e.target.className == 'fa fa-trash') {
+    var is_there = imgdet.findIndex((img_data) => {
+      return img_data.img == e.target.parentNode.parentNode.querySelector('.sign').getAttribute('src')
+    });
+    console.log(is_there)
+    if (is_there != -1) {
+      imgdet.splice(is_there, 1)
+      console.log(imgdet.length)
+      e.target.parentNode.parentNode.remove();
+      (imgdet.length > 0) ? save_btn.style.display = "block" : save_btn.style.display = "none";
+      (imgdet.length > 0) ? download_btn.style.display = "block" : download_btn.style.display = "none";
+      console.log('deleted')
+      console.log(JSON.stringify(imgdet))
+    }
+    else {
+      console.log(imgdet.length);
+
+      (imgdet.length > 0) ? save_btn.style.display = "block" : save_btn.style.display = "none";
+      (imgdet.length > 0) ? download_btn.style.display = "block" : download_btn.style.display = "none";
+      e.target.parentNode.parentNode.remove();
+    }
+    return;
   }
-},3000)
+  if (e.target.className == 'sign') {
+    e.target.parentNode.classList.toggle('active-sign');
+  }
+})
