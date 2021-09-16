@@ -28,16 +28,7 @@ var signaturePad = new SignaturePad(canvas, {
   penColor: 'rgb(0, 0, 0)'
 });
 
-document.getElementById('save').addEventListener('click', function () {
-  if (signaturePad.isEmpty()) {
-    return alert("Please provide a signature first.");
-  }
 
-  var data = signaturePad.toDataURL('image/png');
-
-  // Send data to server instead... 
-  window.open(data);
-});
 document.getElementById('clear').addEventListener('click', function () {
   signaturePad.clear();
 });
@@ -61,9 +52,9 @@ let sign, signHolder
 document.getElementById('apply').addEventListener('click', (event) => {
   sign = document.createElement('img');
   signHolder = document.createElement('div');
-  insideHolder = document.createElement('div');
+  // insideHolder = document.createElement('div');
 
-  // signHolder.setAttribute('class',"signHolder")
+  signHolder.setAttribute('class', "signHolder")
   data = signaturePad.toDataURL('image/png');
   sign.src = data;
   sign.setAttribute('class', 'sign');
@@ -85,26 +76,26 @@ document.getElementById('apply').addEventListener('click', (event) => {
   bright.setAttribute('class', 'bright');
   bmiddle.setAttribute('class', 'bmidlle');
   bleft.setAttribute('class', 'bleft');
-  insideHolder.appendChild(tright)
+  signHolder.appendChild(tright)
   tright.appendChild(dicon)
-  insideHolder.appendChild(tleft)
-  insideHolder.appendChild(tmiddle)
-  insideHolder.appendChild(bmiddle)
-  insideHolder.appendChild(bleft)
-  insideHolder.appendChild(ylm)
-  insideHolder.appendChild(yrm)
-  insideHolder.appendChild(bright)
-  console.log(`page is${which_page}` + "page is")
+  signHolder.appendChild(tleft)
+  signHolder.appendChild(tmiddle)
+  signHolder.appendChild(bmiddle)
+  signHolder.appendChild(bleft)
+  signHolder.appendChild(ylm)
+  signHolder.appendChild(yrm)
+  signHolder.appendChild(bright)
+  console.log(`page is${which_page}`)
 
   let page = document.getElementById(`holder-page-${which_page || 1}`);
   page.classList.add('dragarea');
-  insideHolder.setAttribute('class', "signdoc")
+  signHolder.setAttribute('class', "signdoc")
   signHolder.classList.add('draggable');
 
   sign.onload = () => {
     console.log('image ready')
-    insideHolder.appendChild(sign)
-    signHolder.appendChild(insideHolder)
+    signHolder.appendChild(sign)
+    // signHolder.appendChild(insideHolder)
 
   }
 

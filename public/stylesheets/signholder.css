@@ -1,0 +1,136 @@
+.dragarea{
+    position:relative;
+  }
+  
+  .sign{
+  width: 100%;
+  height: 100%;
+  }
+  .draggable{
+    position: absolute;
+    top: 100px;
+  }
+  
+  
+  #downloadbtn,#savebtn{
+    display: none;
+  }
+  .align-item-center {
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+  }
+  .btn{
+    margin: 3px;
+  }
+  /* for sign border */
+  /* .signdoc{position: relative;} */
+  .tright,.tleft,.tmiddle,.bright,.bleft,.bmidlle,.ylm,.yrm{
+    border:2px solid #101a2c;
+    width:3%;height:6%;
+    position:absolute;
+    background:#0a8cc0;
+    border-radius:50%;
+    display:none;
+  }
+  .signdoc:hover{ border:2px solid teal;}
+  .signdoc:hover .tright{
+    display:block;
+   
+  }
+  .signdoc:hover .yrm{
+    display:block;
+  }
+  .signdoc:hover .ylm{
+    display:block;
+  }
+  .signdoc:hover .tmiddle{
+    display:block;
+  }
+  .signdoc:hover .bright{
+    display:block;
+  }
+  .signdoc:hover .bmidlle{
+    display:block;
+  }
+  .signdoc:hover .bleft
+  {
+    display:block;
+  }
+  .signdoc:hover .tleft
+  {
+    display:block;
+  }
+  
+  
+  .tright{
+    top:-5%;
+    right:-2%;
+  }.tmiddle{
+    top:-5%;
+    right:50%;
+  }.tleft{
+    top:-5%;
+    left:-2%;
+  }.ylm{
+    top:50%;
+    left:-2%;
+  }
+  .yrm{
+    top:50%;
+    right:-2%;
+  }
+  .bright{
+    bottom:-5%;
+    right:-2%;
+  }
+  .bmidlle{
+    bottom:-5%;
+    right:50%;
+  }
+  .bleft{
+    bottom:-5%;
+    left:-2%;
+  }
+  
+  .active-sign{
+  
+    border: 2px solid rgb(110, 152, 241);
+  }
+  .active-sign .tright{
+    display:block;
+   
+  }
+  .active-sign .yrm{
+    display:block;
+  }
+  .active-sign .ylm{
+    display:block;
+  }
+  .active-sign .tmiddle{
+    display:block;
+  }
+  .active-sign .bright{
+    display:block;
+  }
+  .active-sign .bmidlle{
+    display:block;
+  }
+  .active-sign .bleft
+  {
+    display:block;
+  }
+  .active-sign .tleft
+  {
+    display:block;
+  }
+  .fa-trash{
+    display:none;
+  }
+  .active-sign i.fa.fa-trash {
+    display: block;
+    position: absolute;
+    right: -230%;
+    font-size: 18pt;
+    cursor: pointer;
+  }

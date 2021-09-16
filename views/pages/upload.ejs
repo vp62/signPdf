@@ -1,0 +1,80 @@
+<div class="item-wrapper one">
+    <div class="item">
+        <form id="form" data-validation="true" action="/api/upload" method="post" enctype="multipart/form-data">
+            <div class="item-inner">
+                <div class="item-content">
+                    <div class="image-upload">
+                        <div>
+                            <h5><b>Drag and drop your file here</b></h5>
+                            <h6 class="mt-10 mb-70">Or</h6>
+                        </div>
+                        <label style="cursor: pointer" for="uploadFile" class="btn btn-success btn-lg">
+                            <img src="" alt="" class="uploaded-image" />
+                            Upload
+                            <!--upload-content-->
+                            <!-- <input type="file" name="uploadFile" id="uploadFile" accept=".pdf" class="image-input"/> -->
+                        </label>
+                        <input type="file" name="uploadFile" id="uploadFile" accept=".pdf" class="image-input" />
+                    </div>
+                    <!-- <input class="btn btn-primary" type="submit" /> -->
+                </div>
+                <!--item-content-->
+            </div>
+            <!--item-inner-->
+        </form>
+    </div>
+    <!--item-->
+    <p>This file should be only in pdf format and the size should not exceed 12MB</p>
+</div>
+</body>
+<script>
+    const dropArea = document.querySelector('.image-upload')
+    dropArea.ondragover = dropArea.ondragenter = (e) => {
+        console.log("in over and enter")
+        e.preventDefault();
+    }
+    dropArea.ondrop = (evt) => {
+        console.log(evt.dataTransfer)
+        var fileInput = document.getElementById("uploadFile");
+        fileInput.file = undefined;
+        fileInput.files = evt.dataTransfer.files;
+        console.log(fileInput.files)
+
+        if (fileInput.files[0].size < 12582912) {
+            document.getElementById("form").submit();
+            fileInput.files = null;
+        }
+        else {
+            alert("Size exceeds");
+            this.value = "";
+        }
+        evt.preventDefault();
+
+    }
+
+
+    var uploadField = document.getElementById("uploadFile");
+
+    uploadField.onchange = function () {
+        console.log(this.files[0].size)
+        if (this.files[0].size >0) {
+            document.getElementById("form").submit();
+        }
+        else {
+            Swal.fire("Size Exceeded", "please provide less than 12MB file;", "error");
+            this.value = "";
+        }
+    };
+    var uploadField1 = document.getElementById("nav-upload");
+
+    uploadField1.onchange = function () {
+        console.log(this.files[0].size)
+        if (this.files[0].size < 12582912) {
+            document.getElementById("form1").submit();
+        }
+        else {
+            Swal.fire("Size Exceeded", "please provide less than 12MB file;", "error");
+            this.value = "";
+        }
+    };
+</script>

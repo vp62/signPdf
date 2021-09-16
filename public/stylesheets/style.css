@@ -3,6 +3,20 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+nav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+nav a,.nav-upload {
+  float: left;
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 a {
   color: #00B7FF;
@@ -14,6 +28,7 @@ a {
 }
 .container {
   overflow-y: scroll;
+  overflow-x: hidden;
   display: flex;
   height: 90vh;
   width:595px;
@@ -31,13 +46,8 @@ body {
 }
 canvas[id*="page-"] {
 	box-shadow: 1px 2px 8px -1px rgba(0, 0, 0, 0.23);
-	/* padding: 10px;
-	margin: 5px; */
-}
 
-/* .item .item-content {
-  padding: 30px 35px
-} */
+}
 .item .item-content {
   padding: 30px 35px;
   display: flex;
@@ -47,21 +57,34 @@ canvas[id*="page-"] {
   align-items: center;
 }
 .item-wrapper{
-   display: flex;
+  display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .image-upload {
   width: 468px;
-  height: 300px;
-  border: 2px dashed #000;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  position: relative;
-  text-align: center;
-  background: #ffffff80;
-  color: rgb(0 0 0);
-  overflow: hidden;
+    height: 300px;
+    border: 2px dashed #000;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    position: relative;
+    text-align: center;
+    background: #ffffff80;
+    color: rgb(0 0 0);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
+
+.image-upload.active{
+  border: 2px solid  rgb(185, 182, 182);
+  }
+  
+
 
 .item-wrapper form img {
   margin-bottom: 20px;
@@ -161,258 +184,3 @@ body{
   background-color: #f8f9fa;
 }
 
-.dragarea{
-  position:relative;
-}
-/* #holder-page-1{
-  position: relative;
-} */
-.sign{
-width: 100%;
-height: 100%;
-}
-.draggable{
-  position: absolute;
-  top: 100px;
-}
-
- 
- /* .draggable .tright,.tleft,.bright,.bleft,.tmiddle,.bmiddle {
-   display: none;
-   position: absolute;
-   width: 8px; 
-   border:1.2px groove rgb(64, 171, 185);
-   height: 8px;
-   border-radius: 50%;
-   background-color: rgb(238, 230, 230);
-}
-.draggable:hover{ border:2px solid teal;}
-.draggable:hover .tleft{
-  display: block;
-  top:-2px;
-  left:-2px;
-}
-.draggable:hover .bleft{
-  display: block;
-  bottom:-2px;
-  left:-2px;
-}
-.draggable:hover .bmiddle{
-  display: block;
-  bottom:-2px;
-  left:12px;
-}
-.draggable:hover .tright{
-  display: block;
-  position: inherit;
-  top:-2px;
-  right:-2px;
-  
-
-}
-.draggable:hover .tmiddle{
-  display: block;
-  position: inherit;
-  top:-2px;
-  right:15px;
-
-}
-.draggable:hover .bright:not(first_child){
-  display: block;
-  bottom:-2px;
-  right:-2px;
-
-}
- 
- .active .tright,.tleft,.bright,.bleft,.tmiddle,.bmiddle {
-   display: none;
-   position: absolute;
-   width: 8px; 
-   border:1.2px groove rgb(64, 171, 185);
-   height: 8px;
-   border-radius: 50%;
-   background-color: rgb(238, 230, 230);
-}
-
-
-.active .tleft{
-  display: block;
-  top:-2px;
-  left:-2px;
-}
-.active .bleft{
-  display: block;
-  bottom:-2px;
-  left:-2px;
-}
-.active .tright{
-  display: block;
-  position: inherit;
-  top:-2px;
-  right:-2px;
-  
-
-}
-.active .bright{
-  display: block;
-  bottom:-2px;
-  right:-2px;
-
-}
-
-.active .fa-trash{
-  display: block;
-  top:-3px;
-  position: absolute;
-  right: -22px;
-font-size: 18pt;
-cursor: pointer;
-}
-.tleft{
-  top:0px;
-  left:0px;
-
-}
- .bleft{
-  bottom:-2px;
-  left:-2px;
-}
-.tright{
-  top:-2px;
-  right:-2px;
-
-}
-.bright{
-  bottom:-2px;
-  right:-2px;
-
-}
-.by-trash{
-  display: none;
-  top:-2px;
-  right: -12px;
-  margin-left: 2px;
-} */
-
-#downloadbtn,#savebtn{
-  display: none;
-}
-.align-item-center {
-  display: flex;
-  padding: 5px;
-  justify-content: center;
-}
-.btn{
-  margin: 3px;
-}
-/* for sign border */
-.signdoc{position: relative;}
-.tright,.tleft,.tmiddle,.bright,.bleft,.bmidlle,.ylm,.yrm{
-  border:2px solid #101a2c;
-  width:3%;height:6%;
-  position:absolute;
-  background:#0a8cc0;
-  border-radius:50%;
-  display:none;
-}
-.signdoc:hover{ border:2px solid teal;}
-.signdoc:hover .tright{
-  display:block;
- 
-}
-.signdoc:hover .yrm{
-  display:block;
-}
-.signdoc:hover .ylm{
-  display:block;
-}
-.signdoc:hover .tmiddle{
-  display:block;
-}
-.signdoc:hover .bright{
-  display:block;
-}
-.signdoc:hover .bmidlle{
-  display:block;
-}
-.signdoc:hover .bleft
-{
-  display:block;
-}
-.signdoc:hover .tleft
-{
-  display:block;
-}
-
-
-.tright{
-  top:-5%;
-  right:-2%;
-}.tmiddle{
-  top:-5%;
-  right:50%;
-}.tleft{
-  top:-5%;
-  left:-2%;
-}.ylm{
-  top:50%;
-  left:-2%;
-}
-.yrm{
-  top:50%;
-  right:-2%;
-}
-.bright{
-  bottom:-5%;
-  right:-2%;
-}
-.bmidlle{
-  bottom:-5%;
-  right:50%;
-}
-.bleft{
-  bottom:-5%;
-  left:-2%;
-}
-
-.active-sign{
-
-  border: 2px solid rgb(110, 152, 241);
-}
-.active-sign .tright{
-  display:block;
- 
-}
-.active-sign .yrm{
-  display:block;
-}
-.active-sign .ylm{
-  display:block;
-}
-.active-sign .tmiddle{
-  display:block;
-}
-.active-sign .bright{
-  display:block;
-}
-.active-sign .bmidlle{
-  display:block;
-}
-.active-sign .bleft
-{
-  display:block;
-}
-.active-sign .tleft
-{
-  display:block;
-}
-.fa-trash{
-  display:none;
-}
-.active-sign i.fa.fa-trash {
-  display: block;
-  position: absolute;
-  right: -230%;
-  font-size: 18pt;
-  cursor: pointer;
-}

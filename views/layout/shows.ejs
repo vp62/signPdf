@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Show</title>
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script
     src="https://cdn.jsdelivr.net/combine/npm/pdfjs-dist@2.9.359,npm/pdfjs-dist@2.9.359/build/pdf.min.js,npm/pdfjs-dist@2.9.359/build/pdf.worker.min.js">
@@ -34,10 +35,13 @@
 </head>
 
 <body>
+  <header><%-include(`./layout/partials/navbar`)%></header>
   <div class="renderbox container-fluid"> 
     <div class="container-fluid toolbox position-sticky sticky-top d-flex flex-column justify-content-end">
+
+
       <div class="align-item-center">
-        <button type="button" id="signbutton" class="btn btn-primary" data-bs-toggle="modal"
+        <button type="button" id="signbutton" class="btn btn-success" data-bs-toggle="modal"
           data-bs-target="#exampleModal">
           Add Signature
         </button>
@@ -46,7 +50,7 @@
           <a href="/down">Download</a>
         </button>
         
-        <button id="savebtn" class="btn btn-success" onclick="saveit()">save sign
+        <button id="savebtn" class="btn btn-success" onclick="saveit()">Save
         </button>
       </div>
     </div>
@@ -58,16 +62,16 @@
             <h5 class="modal-title" id="exampleModalLabel">Sign Here</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body d-flex flex-row justify-content-center">
+          <div class="modal-body d-flex flex-row justify-content-center  ">
 
             <div class="wrapper">
               <canvas id="signature-pad" class="signature-pad justify-content-center" width=400 height=200></canvas>
+              <div class="clr" id="clr"><a href="#">Clear</a></div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn-lg btn-warning  clear" id="clear">Clear</button>
-            <button type="button" class="btn-lg btn-primary mr-3 save" id="save">Save</button>
-            <button type="button" class="btn-lg btn-success " data-bs-dismiss="modal" id="apply">Apply</button>
+            
+            <button type="button" class="btn-lg btn-success " data-bs-dismiss="modal" id="save">Add</button>
           </div>
         </div>
       </div>
@@ -92,7 +96,18 @@
 </body>
 
 <script>
+var uploadField1 = document.getElementById("uploadFile1");
 
+uploadField1.onchange = function() {
+  console.log(this.files[0].size )
+    if(this.files[0].size < 12582912){
+      document.getElementById("form1").submit();
+    }
+    else{
+      alert("Size exceeds");
+       this.value = "";
+    }
+};
   console.log('<%=url%>')
   var pdfDatas = atob('<%=url%>');
   renderPDF({ data: pdfDatas }, document.querySelector('.container'));

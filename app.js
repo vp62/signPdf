@@ -42,7 +42,12 @@ const multerStorage = multer.diskStorage({
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.split("/")[1] === "pdf") {
+    console.log(req.file)
     cb(null, true);
+  }
+  else if(file.size>12582912){
+    console.log("heree come")
+    cb(new Error("size exeed!"), false);
   }
   else {
     cb(new Error("Not a PDF File!!"), false);
@@ -58,17 +63,21 @@ const upload = multer({
 //index
 app.get('/', function (req, res, next) {
   console.log(req.body);
-  res.render('index', { title: 'SignPdf' });
+  res.render('layout', {file:"upload" ,title: 'SignPdf' });
 });
 
 let file, pdf, file_name;
 //upload
-app.post('/api/upload', upload.single('uploadFile'), async (req, res) => {
+function sizeExeed(req,res,next){if(req.file.size>12582912)throw new Error("size exeeds")}
+app.post('/api/upload', upload.single('uploadFile'), async (req, res,next) => {
   console.log("Inpost");
   try {
+  
     file_name = req.file.originalname;
-    console.log(":" + req.file.originalname);
+
+    console.log(":" + req.file.size);
     fs.readFile(req.file.path, (err, data) => {
+      if(err) throw new Error("pdf crashed");
       console.log(data);
       file = data.toString();
       pdf = data.toString('base64');
@@ -81,20 +90,31 @@ app.post('/api/upload', upload.single('uploadFile'), async (req, res) => {
     //  await insert.save().then(console.log("inserted"));
 
   }
-  catch (err) { console.log(err); }
+  catch (err) { 
+    console.log("api upload error")
+    console.log(err);
+    next(err) }
 });
 
 // get show
-app.get('/show', (req, res) => {
-  //  console.log(pdf);
-  res.render('shows', { url: pdf, pdf: file });
+app.get('/show', (req,res,next) => {
+ try{
+   res.render('layout', { url: pdf, pdf: file ,file:"shows",title:"Add sign Here"},(err,htm)=>{
+     if(err)throw new Error("Your pdf seamed to be crashed upload proper one");
+    res.send(htm)
+   });
+  }catch(err){
+    console.log('from show')
+    console.log(err.message)
+    next(err)
+  }
+
 });
 app.post('/download', async (req, res, next) => {
   try {
     console.log(req.body)
     console.log(req.body.x)
     await download({ imgdet: req.body, pdfUrl: path.join(__dirname, `Files/admin-${file_name}`) },);
-    // res.redirect('/down')
     req.body.forEach(element => {
       element = {}
     });
@@ -105,10 +125,12 @@ app.post('/download', async (req, res, next) => {
     next(err)
   }
 })
-app.get('/down', (req, res) => {
-  res.download(path.join(__dirname, `Files/admin-${file_name}`)
-  )
-})
+app.get('/down', (req, res,) => {
+
+
+    res.download( path.join(__dirname,`Files/admin-${file_name}`));
+    // res.redirect('/')
+},(req,res)=>{console.log("comes");res.redirect('/')})
 
 
 app.use(function (req, res, next) {
@@ -116,12 +138,13 @@ app.use(function (req, res, next) {
 });
 
 // error handlerxxxxxxxx`
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
+  console.log('from error\n',err.status,err.message)
   res.status(err.status || 500);
   res.render('error');
 });
