@@ -124,13 +124,13 @@
   {
     display:block;
   }
-  .fa-trash{
+  .fa-trash,.signdoc:hover .fa-trash{
     display:none;
   }
   .active-sign i.fa.fa-trash {
     display: block;
     position: absolute;
     right: -230%;
-    font-size: 18pt;
+    font-size: 143%;
     cursor: pointer;
   }

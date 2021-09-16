@@ -75,7 +75,7 @@
     </div>
 
 
-    <div class="container position-sticky">
+    <div class="container position-sticky page-container">
 
     </div>
   </div>
@@ -98,18 +98,18 @@
   // var pdfDatas = atob('<%=url%>');
   // renderPDF({ data: pdfDatas }, document.querySelector('.container'));
 
-  var uploadField1 = document.getElementById("nav-upload");
+  // var uploadField1 = document.getElementById("nav-upload");
 
-  uploadField1.onchange = function () {
-    console.log(this.files[0].size)
-    if (this.files[0].size < 12582912) {
-      document.getElementById("form1").submit();
-    }
-    else {
-      alert("Size exceeds");
-      this.value = "";
-    }
-  };
+  // uploadField1.onchange = function () {
+  //   console.log(this.files[0].size)
+  //   if (this.files[0].size < 12582912) {
+  //     document.getElementById("form1").submit();
+  //   }
+  //   else {
+  //     alert("Size exceeds");
+  //     this.value = "";
+  //   }
+  // };
   console.log('<%=url%>')
   var pdfDatas = atob('<%=url%>');
   renderPDF({ data: pdfDatas }, document.querySelector('.container'));

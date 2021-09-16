@@ -46,15 +46,16 @@
     background-color: #18bf71;
     border-color: #18bf71;
   }
-  nav a {
+  /* nav a {
     float: left;
     font-size: 2rem;
     color: white;
+    text-decoration: none;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     cursor: pointer;
-  }
+  } */
   .wrapper {
       position: relative;
       width: 400px;

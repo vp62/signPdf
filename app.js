@@ -67,8 +67,9 @@ app.get('/', function (req, res, next) {
 });
 
 let file, pdf, file_name;
-//upload
 function sizeExeed(req,res,next){if(req.file.size>12582912)throw new Error("size exeeds")}
+
+//upload
 app.post('/api/upload', upload.single('uploadFile'), async (req, res,next) => {
   console.log("Inpost");
   try {

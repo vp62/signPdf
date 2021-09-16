@@ -1,17 +1,20 @@
 function renderPDF(data, canvasContainer){
      async function  renderPage(page) {
+       var canvas = document.createElement('canvas');
+       var ctx = canvas.getContext('2d');
+       canvas.height = 792;
+       canvas.width = 612;
     var viewport = page.getViewport({scale:1});
-    var canvas = document.createElement('canvas');
-    var ctx = canvas.getContext('2d');
+    console.log(page.getViewport({scale:1}))
+    viewport.width=canvas.height;
+    viewport.height=canvas.width;
     var renderContext = {
     canvasContext: ctx,
     viewport: viewport
     };
     
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
     console.log("from show js")
-    console.log(canvas.height)
+    console.log(viewport.width)
     console.log(canvas.width)
 
 

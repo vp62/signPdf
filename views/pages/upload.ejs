@@ -1,34 +1,58 @@
-<div class="item-wrapper one">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
+<body>
+    <div class="container upload-container">
+      
+        <div class="panel panel-light " id="panelX">
+          <div class="panel-heading " id="panel-heading">
+              <span>
+                   Upload your document
+              </span>                 
+              
+
+            <button type="button" class="close text-dark" data-target="panelX" data-dismiss="panel"> 
+                <span class="text-dark" id="close" aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+          </div>
+          <div class="panel-body" id="panel-body">
+             <div class="item-wrapper">
     <div class="item">
         <form id="form" data-validation="true" action="/api/upload" method="post" enctype="multipart/form-data">
-            <div class="item-inner">
                 <div class="item-content">
-                    <div class="image-upload">
-                        <div>
-                            <h5><b>Drag and drop your file here</b></h5>
-                            <h6 class="mt-10 mb-70">Or</h6>
+                    <div class="upload-area">
+                        <div class="upload-text">
+                            <p>Drag and drop your file here</p>
+                            <p class="mt-10 mb-70">Or</p>
                         </div>
-                        <label style="cursor: pointer" for="uploadFile" class="btn btn-success btn-lg">
+                        <label style="cursor: pointer" for="uploadFile" class="btn btn-success btn-lg" id="upload-btn">
                             <img src="" alt="" class="uploaded-image" />
                             Upload
                             <!--upload-content-->
-                            <!-- <input type="file" name="uploadFile" id="uploadFile" accept=".pdf" class="image-input"/> -->
                         </label>
                         <input type="file" name="uploadFile" id="uploadFile" accept=".pdf" class="image-input" />
-                    </div>
-                    <!-- <input class="btn btn-primary" type="submit" /> -->
+                   
                 </div>
-                <!--item-content-->
             </div>
-            <!--item-inner-->
         </form>
     </div>
     <!--item-->
-    <p>This file should be only in pdf format and the size should not exceed 12MB</p>
-</div>
+    <p id="file-info">This file should be only in pdf format and the size should not exceed 12MB</p>
+        </div> 
+          </div>
+          <div class="panel-footer bg-light footer">
+            <br><br>
+          </div>
+        </div>
+      </div>
+        
+
 </body>
 <script>
-    const dropArea = document.querySelector('.image-upload')
+    const dropArea = document.querySelector('.upload-area')
     dropArea.ondragover = dropArea.ondragenter = (e) => {
         console.log("in over and enter")
         e.preventDefault();
@@ -45,7 +69,7 @@
             fileInput.files = null;
         }
         else {
-            alert("Size exceeds");
+            Swal.fire("Size Exceeded", "please provide less than 12MB file;", "error");
             this.value = "";
         }
         evt.preventDefault();
@@ -57,7 +81,7 @@
 
     uploadField.onchange = function () {
         console.log(this.files[0].size)
-        if (this.files[0].size >0) {
+        if (this.files[0].size <12582912) {
             document.getElementById("form").submit();
         }
         else {
@@ -65,16 +89,16 @@
             this.value = "";
         }
     };
-    var uploadField1 = document.getElementById("nav-upload");
+    // var uploadField1 = document.getElementById("nav-upload");
 
-    uploadField1.onchange = function () {
-        console.log(this.files[0].size)
-        if (this.files[0].size < 12582912) {
-            document.getElementById("form1").submit();
-        }
-        else {
-            Swal.fire("Size Exceeded", "please provide less than 12MB file;", "error");
-            this.value = "";
-        }
-    };
+    // uploadField1.onchange = function () {
+    //     console.log(this.files[0].size)
+    //     if (this.files[0].size < 12582912) {
+    //         document.getElementById("form1").submit();
+    //     }
+    //     else {
+    //         Swal.fire("Size Exceeded", "please provide less than 12MB file;", "error");
+    //         this.value = "";
+    //     }
+    // };
 </script>

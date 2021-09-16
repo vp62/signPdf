@@ -38,11 +38,11 @@ var translatePos = {
 };
 
 let which_page = 1;
-document.querySelector('.container').addEventListener('scroll', () => {
-  var top = document.querySelector('.container').scrollTop;
+document.querySelector('.page-container').addEventListener('scroll', () => {
+  var top = document.querySelector('.page-container').scrollTop;
   // if(top/744<)
-  console.log(document.querySelector('.container').scrollTop / 744.32)
-  console.log(document.querySelector('.container').offsetTop)
+  console.log(document.querySelector('.page-container').scrollTop / 744.32)
+  console.log(document.querySelector('.page-container').offsetTop)
 
   which_page = Math.ceil((top / 844.32))
   console.log(which_page)
@@ -189,7 +189,7 @@ function downloadit() {
     .catch(function (res) { console.log(res) })
 }
 
-document.querySelector('.container').addEventListener('click', (e) => {
+document.querySelector('.page-container').addEventListener('click', (e) => {
   console.log(e.target.className)
   e.stopPropagation()
   e.preventDefault()
@@ -212,7 +212,6 @@ document.querySelector('.container').addEventListener('click', (e) => {
     }
     else {
       console.log(imgdet.length);
-
       (imgdet.length > 0) ? save_btn.style.display = "block" : save_btn.style.display = "none";
       (imgdet.length > 0) ? download_btn.style.display = "block" : download_btn.style.display = "none";
       e.target.parentNode.parentNode.remove();
@@ -221,5 +220,8 @@ document.querySelector('.container').addEventListener('click', (e) => {
   }
   if (e.target.className == 'sign') {
     e.target.parentNode.classList.toggle('active-sign');
+  }
+  if(document.querySelectorAll(".sign")!=undefined){
+    document.querySelectorAll(".sign").forEach(item=>{item.classList.remove('active-sign')})
   }
 })
