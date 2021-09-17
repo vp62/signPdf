@@ -12,8 +12,6 @@
               <span>
                    Upload your document
               </span>                 
-              
-
             <button type="button" class="close text-dark" data-target="panelX" data-dismiss="panel"> 
                 <span class="text-dark" id="close" aria-hidden="true">&times;</span>
                 <span class="sr-only">Close</span>
@@ -64,41 +62,45 @@
         fileInput.files = evt.dataTransfer.files;
         console.log(fileInput.files)
 
+        var re = /(?:\.([^.]+))?$/;
+        var ext=fileInput.files[0].name.match(re)[1];
+        console.log(ext[0])
         if (fileInput.files[0].size < 12582912) {
-            document.getElementById("form").submit();
-            fileInput.files = null;
+            console.log(fileInput.files[0].name)
+
+            if(ext=='pdf'){
+                document.getElementById("form").submit();
+                fileInput.files = null;
+            }else{
+            Swal.fire(`You are try to upload ${ext}`, "Please provide a pdf file", "error");
+
+            }
         }
         else {
-            Swal.fire("Size Exceeded", "please provide less than 12MB file;", "error");
+            Swal.fire("Size Exceeded", "please provide less than 12MB file", "error");
             this.value = "";
         }
         evt.preventDefault();
 
     }
-
-
     var uploadField = document.getElementById("uploadFile");
-
     uploadField.onchange = function () {
+        var re = /(?:\.([^.]+))?$/;
+        var ext=this.files[0].name.match(re)[1];
         console.log(this.files[0].size)
         if (this.files[0].size <12582912) {
-            document.getElementById("form").submit();
+            if(ext=='pdf'){
+
+                document.getElementById("form").submit();
+                fileInput.files = null;
+            }else{
+            Swal.fire(`You are try to upload ${ext}`, "Please provide a pdf file;", "error");
+
+            }
         }
         else {
             Swal.fire("Size Exceeded", "please provide less than 12MB file;", "error");
             this.value = "";
         }
     };
-    // var uploadField1 = document.getElementById("nav-upload");
-
-    // uploadField1.onchange = function () {
-    //     console.log(this.files[0].size)
-    //     if (this.files[0].size < 12582912) {
-    //         document.getElementById("form1").submit();
-    //     }
-    //     else {
-    //         Swal.fire("Size Exceeded", "please provide less than 12MB file;", "error");
-    //         this.value = "";
-    //     }
-    // };
 </script>

@@ -50,10 +50,11 @@ const multerFilter = (req, file, cb) => {
     cb(new Error("size exeed!"), false);
   }
   else {
+
     cb(new Error("Not a PDF File!!"), false);
   }
 };
-const upload = multer({
+let upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
 });
@@ -63,19 +64,37 @@ const upload = multer({
 //index
 app.get('/', function (req, res, next) {
   console.log(req.body);
-  res.render('layout', {file:"upload" ,title: 'SignPdf' });
+  res.render('layout', {file:"upload" ,title: 'SignPdf',error:undefined });
 });
 
-let file, pdf, file_name;
+let file, file_name;
+let  pdf=undefined;
 function sizeExeed(req,res,next){if(req.file.size>12582912)throw new Error("size exeeds")}
 
 //upload
-app.post('/api/upload', upload.single('uploadFile'), async (req, res,next) => {
+function cb(err,req,res){
+  if(err)
+  {console.log("err");console.log(err)}
+}
+app.post('/api/upload', (req,res,next)=>{
+  var uploading=upload.single('uploadFile');
+    uploading(req,res,(err)=>{
+      try{
+            if(err)throw new Error("You can only upload Pdf files. Please go back and upload again.");
+      else
+        next()
+
+    }
+    catch(err){
+      // console.log(err);
+      next(err);
+    }
+   
+  })
+}, async (req, res,next) => {
   console.log("Inpost");
   try {
-  
     file_name = req.file.originalname;
-
     console.log(":" + req.file.size);
     fs.readFile(req.file.path, (err, data) => {
       if(err) throw new Error("pdf crashed");
@@ -84,23 +103,17 @@ app.post('/api/upload', upload.single('uploadFile'), async (req, res,next) => {
       pdf = data.toString('base64');
       res.redirect('/show');
     });
-
-    //   let insert= new fileModel({
-    //   name:req.file.filename
-    // });  
-    //  await insert.save().then(console.log("inserted"));
-
   }
   catch (err) { 
     console.log("api upload error")
-    console.log(err);
+    // console.log(err);
     next(err) }
 });
 
 // get show
 app.get('/show', (req,res,next) => {
  try{
-   res.render('layout', { url: pdf, pdf: file ,file:"shows",title:"Add sign Here"},(err,htm)=>{
+   res.render('layout', { url: pdf, pdf: file ,file:"show-model",title:"Add sign Here",error:undefined},(err,htm)=>{
      if(err)throw new Error("Your pdf seamed to be crashed upload proper one");
     res.send(htm)
    });
@@ -134,20 +147,26 @@ app.get('/down', (req, res,) => {
 },(req,res)=>{console.log("comes");res.redirect('/')})
 
 
-app.use(function (req, res, next) {
-  next(createError(404));
+app.use(function (err,req, res, next) {
+  console.log("1st err router")
+  next(err);
+  // res.status(404)
 });
 
 // error handlerxxxxxxxx`
-app.use(function (err, req, res) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use((err, req, res, next) => {
+  console.log("error")
+  if (err.status != 404) {
+    res.locals.status=err.status;
+    res.locals.message=err.message;
+  return res.render('error',{error:err})
+  // res.redirect('/')
+  }
+  // console.log(res.locals.list)
+  // res.render('layout', {
+  //   error:undefined,file:'upload'
+  // })
+})
 
-  // render the error page
-  console.log('from error\n',err.status,err.message)
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 module.exports = app;

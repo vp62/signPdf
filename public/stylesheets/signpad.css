@@ -1,27 +1,4 @@
-.wrapper {
-    position: relative;
-    width: 400px;
-    height: 200px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
   
-  .signature-pad {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width:400px;
-    height:200px;
-    background-color: rgba(255, 255, 255, 0.932);
-    box-shadow: 0px 0.21px 4px 0.5px;
-
-  }
-  /* img:hover{
-    border: 1px solid rgb(59, 119, 231);
-
-  } */
  div [id*="holder-page"]{
   position: relative;
   }
@@ -29,33 +6,40 @@
     position: absolute;
     top:0%;
     left:0;
-    /* border:1px solid; */
     z-index: 3;
   }
+  #exampleModalLabel{
+    font-size: small;
+  }
+  #sign-close{
+   font-size:8px;
+  }
+  #sign-modal{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+    margin-top: 20%;
+  }
+  #downloadbtn, #savebtn,#signbutton {
+    font-size: 14px;
+}
   #downloadbtn a{
     text-decoration: none;
     color: aliceblue;
     font-size: 1.3rem;
-  }
-  nav {
-    overflow: hidden;
-    background-color: #0e2a8ebf;
   }
   .btn-success {
     color: #fff;
     background-color: #18bf71;
     border-color: #18bf71;
   }
-  /* nav a {
-    float: left;
-    font-size: 2rem;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    cursor: pointer;
-  } */
   .wrapper {
       position: relative;
       width: 400px;
@@ -77,33 +61,27 @@
   }
     .signature-pad {
       position: absolute;
-      left: 0;
-      top: 0;
-      width:400px;
-      height:200px;
-      background-color: rgba(255, 255, 255, 0.932);
-      box-shadow: 0px 0.21px 4px 0.5px;
+    left: 0;
+    border: 1px solid #cac0c0;
+    border-radius: 5px;
+    top: 0;
+    width: 400px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.932);
   
     }
    div [id*="holder-page-"]{
     position: relative;
-    }
-    #sign{
-      position: absolute;
-      top:0%;
-      left:0;
-      /* border:1px solid; */
-      z-index: 3;
     }
     #downloadbtn a{
       text-decoration: none;
       color: aliceblue;
       font-size: 1.3rem;
     }
-    .modal.fade .modal-dialog {
+    /* .modal.fade .modal-dialog {
       transition: transform .3s ease-out;
       transform: translate(0,-50px);
       position: absolute;
       top: 25%;
       left: 33%;
-  }
+  } */

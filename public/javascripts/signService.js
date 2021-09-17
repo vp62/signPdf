@@ -1,6 +1,6 @@
 var download_btn = document.getElementById('downloadbtn');
 var save_btn = document.getElementById('savebtn');
-
+var sign_btn=document.getElementById('signbutton');
 var canvas = document.getElementById('signature-pad');
 var img;
 var scale = 1.0;
@@ -32,24 +32,24 @@ var signaturePad = new SignaturePad(canvas, {
 document.getElementById('clear').addEventListener('click', function () {
   signaturePad.clear();
 });
-var translatePos = {
-  x: 0,
-  y: 0
-};
-
+var translatePos ;
 let which_page = 1;
 document.querySelector('.page-container').addEventListener('scroll', () => {
   var top = document.querySelector('.page-container').scrollTop;
   // if(top/744<)
-  console.log(document.querySelector('.page-container').scrollTop / 744.32)
+  console.log(document.querySelector('.page-container').scrollTop / 601.5)
   console.log(document.querySelector('.page-container').offsetTop)
 
-  which_page = Math.ceil((top / 844.32))
+  which_page = Math.ceil((top / 785.32))
   console.log(which_page)
 
 })
 let sign, signHolder
 document.getElementById('apply').addEventListener('click', (event) => {
+  translatePos = {
+  x: 0,
+  y: 0
+};  
   sign = document.createElement('img');
   signHolder = document.createElement('div');
   // insideHolder = document.createElement('div');
@@ -95,14 +95,17 @@ document.getElementById('apply').addEventListener('click', (event) => {
   sign.onload = () => {
     console.log('image ready')
     signHolder.appendChild(sign)
+    // saveit()
+    position.x=0;
+    position.y=0;
+    translatePos.x=0;
+    translatePos=0;
     // signHolder.appendChild(insideHolder)
-
   }
 
   page.append(signHolder)
   download_btn.style.display = "none";
   save_btn.style.display = "block";
-  const position = { x: 0, y: 0 }
 
 })
 
@@ -110,6 +113,9 @@ save_btn.addEventListener('click', () => {
   // document.getElementById('signbutton').style.display = 'none';
   // save_btn.style.display = 'none';
   download_btn.style.display = 'block';
+  sign_btn.style.display = 'none';
+  save_btn.style.display='none';
+
 })
 
 let width = 20, height = 10;
@@ -131,9 +137,9 @@ interact('.draggable')
           height: `${event.rect.height}px`,
           transform: `translate(${position.x}px, ${position.y}px)`
         })
-        console.log(x, y, position.x, position.y)
         Object.assign(event.target.dataset, { x, y })
-        // saveit()
+        console.log(x, y, position.x, position.y)
+        saveit()
       }
     }
   })
@@ -146,35 +152,42 @@ interact('.draggable')
       move(event) {
         position.x += event.dx
         position.y += event.dy
+        saveit();
 
         event.target.style.transform =
           `translate(${position.x}px, ${position.y}px)`
-        // saveit()''
-        console.log(event.target.style.transform)
-      },
-    }
-  })
+          console.log(event.target.style.transform)
+        },
+      }
+    })
 
 var imgdet = [];
+// setInterval(saveit,500)
 function saveit() {
-  var is_there = imgdet.findIndex((img_data, index) => {
-    console.log(typeof (img_data.img))
-    console.log(typeof (data.toString()))
-    if (img_data.img.toString() == data.toString()) {
-      return index;
-    }
-  })
+  var is_there = imgdet.findIndex((img_data, index) =>img_data.img=== data.toString()) 
   console.log(is_there)
   if (is_there == -1) {
-
     imgdet.push({ img: data.toString(), x: position.x || 306, y: position.y || 396, width: width, height: height, page: which_page - 1 })
-    console.log('saved')
+    console.log('new push')
+    console.log(imgdet.length)
     console.log(JSON.stringify(imgdet))
+
   }
+  else if(imgdet.length>0){
+    console.log("updated")
+    console.log(is_there+ "is updated")
+    imgdet[is_there].x=position.x;
+    imgdet[is_there].y=position.y;
+    imgdet[is_there].width=width;
+    imgdet[is_there].height=height;
+    // console.log(JSON.stringify(imgdet))
+  }
+  console.log(`total ${imgdet.length} sign added`)
 }
 function downloadit() {
   console.log(sign)
   console.log(position)
+  console.log(imgdet)
 
   fetch("/download",
     {
@@ -197,9 +210,7 @@ document.querySelector('.page-container').addEventListener('click', (e) => {
   e.bubbles = false;
   console.log(e.target.classList)
   if (e.target.className == 'fa fa-trash') {
-    var is_there = imgdet.findIndex((img_data) => {
-      return img_data.img == e.target.parentNode.parentNode.querySelector('.sign').getAttribute('src')
-    });
+    var is_there = imgdet.findIndex((img_data) => img_data.img == e.target.parentNode.parentNode.querySelector('.sign').getAttribute('src'));
     console.log(is_there)
     if (is_there != -1) {
       imgdet.splice(is_there, 1)
@@ -225,3 +236,6 @@ document.querySelector('.page-container').addEventListener('click', (e) => {
     document.querySelectorAll(".sign").forEach(item=>{item.classList.remove('active-sign')})
   }
 })
+document.getElementById('closebtn').onclick=()=>{
+  document.getElementById('close-form').submit();
+}

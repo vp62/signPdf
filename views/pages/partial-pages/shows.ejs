@@ -1,0 +1,71 @@
+<body>
+  <div class="renderbox container-fluid">
+    <div class="container-fluid toolbox position-sticky sticky-top d-flex flex-column justify-content-end">
+      
+      <!-- page will load herer -->
+          <div class="container position-sticky page-container">    </div>
+
+      
+    </div>
+<!--  -->
+<!--  -->
+
+  </div>
+
+ 
+</body>
+
+
+<script>
+
+  // console.log('<%=url%>')
+  // var pdfDatas = atob('<%=url%>');
+  // renderPDF({ data: pdfDatas }, document.querySelector('.container'));
+
+  // var uploadField1 = document.getElementById("nav-upload");
+
+  // uploadField1.onchange = function () {
+  //   console.log(this.files[0].size)
+  //   if (this.files[0].size < 12582912) {
+  //     document.getElementById("form1").submit();
+  //   }
+  //   else {
+  //     alert("Size exceeds");
+  //     this.value = "";
+  //   }
+  // };
+  
+  console.log('<%url%>')
+  var pdfDatas = atob('<%=url%>');
+  console.log(typeof(pdfDatas))
+  if(pdfDatas!=''){
+    console.log(typeof('<%=url%>'))
+    renderPDF({ data: pdfDatas }, document.querySelector('.page-container'));
+  }
+  else{
+    var t=3;
+    // Swal.fire(`Can't load a file,`, `Please upload it again\nthis will  automatically redirecting in ${t--} sec`, "error");
+    // setInterval(() => {
+    //   t--;
+      Swal.fire(`Can't load a file,`, `Please upload it again\nthis will redirecting automaticaly in ${t--} sec`, "error");
+    // }, 1000); setInterval(() => {
+    // }, 2000);
+   var redir= document.createElement('form');
+   redir.setAttribute('action','/');
+  //  redir.setAttribute('action','/');
+   document.body.appendChild(redir)
+   setTimeout(()=>{
+    redir.submit();
+   },3000)
+  console.log("err")
+    // fetch('/').then(console.log("fetched"));
+  }
+  // if(<%url%>)
+  // if(pdfDatas==undefined|pdfDatas==null){
+  //   console.log("null")
+  // }
+</script>
+
+</html>
+
+</html>

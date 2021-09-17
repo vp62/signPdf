@@ -26,14 +26,15 @@
   /* for sign border */
   /* .signdoc{position: relative;} */
   .tright,.tleft,.tmiddle,.bright,.bleft,.bmidlle,.ylm,.yrm{
-    border:2px solid #101a2c;
-    width:3%;height:6%;
+    border:2px solid #2873ff;
+    min-width:15px ;min-height:15px;
+    max-width:15px;max-height:15px;
     position:absolute;
-    background:#0a8cc0;
+    background:#ffffff;
     border-radius:50%;
     display:none;
   }
-  .signdoc:hover{ border:2px solid teal;}
+  .signdoc:hover{ border:2px solid #2873ff;}
   .signdoc:hover .tright{
     display:block;
    
@@ -64,33 +65,33 @@
   
   
   .tright{
-    top:-5%;
-    right:-2%;
+    top:-7px;
+    right:-7px;
   }.tmiddle{
-    top:-5%;
-    right:50%;
+    top:-9px;
+    right:47%;
   }.tleft{
-    top:-5%;
-    left:-2%;
+    top:-7px;
+    left:-7px;
   }.ylm{
-    top:50%;
-    left:-2%;
+    top:45%;
+    left:-9px;
   }
   .yrm{
-    top:50%;
-    right:-2%;
+    top:45%;
+    right:-9px;
   }
   .bright{
-    bottom:-5%;
-    right:-2%;
+    bottom:-7px;
+    right:-7px;
   }
   .bmidlle{
-    bottom:-5%;
-    right:50%;
+    bottom:-9px;
+    right:47%;
   }
   .bleft{
-    bottom:-5%;
-    left:-2%;
+    bottom:-7px;
+    left:-7px;
   }
   
   .active-sign{
@@ -130,7 +131,13 @@
   .active-sign i.fa.fa-trash {
     display: block;
     position: absolute;
-    right: -230%;
+    top: -26px;
+    right: -30px;
     font-size: 143%;
+    font-size: 18px;
     cursor: pointer;
-  }
+    background: #ffffff;
+    padding: 6px 8px;
+    border: 2px solid #eae9e9;
+    border-radius: 5px;
+}

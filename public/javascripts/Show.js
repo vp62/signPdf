@@ -36,7 +36,7 @@ async function renderPages(pdfDoc) {
 
 
 pdfjsLib.disableWorker = true;
-pdfjsLib.getDocument(data).promise.then(renderPages);
+pdfjsLib.getDocument(data).promise.then(renderPages).catch(err=>{console.log(err)});
 
 }   
 
